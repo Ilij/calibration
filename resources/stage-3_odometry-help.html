@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="true">
+    <meta name="HandheldFriendly" content="true">
+    <title>Stage 0</title>
+    <link rel="stylesheet" href="/resources/style.css">
+</head>
+<body>
+    <title>
+        Сбор снимков для калибровки экстринстиков:
+    </title>
+    <ul>
+        <li>Шахматная доска</li>
+        <li>Смежные снимки</li>
+        <li><b>Одометрия</b></li>
+        <li>Направление конвейера</li>
+        <li>Поддон</li>
+    </ul>
+    Делается для лазерных камер, и камер дефектоскопии (она же, камера одометрии)
+    
+    Идея в том чтобы увязать экстринсик параметры дефектоскопийных камер с лазерными.
+    
+    Для этого делается фото одной и той же шахматной доски, попадающей в поле зрение дефектоскопийной и лазерной камеры, а также фото доски попадающей в поле зрения обеих дефектоскопийных камер.
+    <div class="preview">
+        <img src="/resources/Untitled.png">
+        <label>
+            Дефектоскопийная камера 1, связка с лазером
+        </label>
+    </div>
+
+    <div class="preview">
+        <img src="/resources/Untitled.png">
+        <label>
+            Лазерная камера 1, связка с дефектоскопией
+        </label>
+    </div>
+
+    <div class="preview">
+        <img src="/resources/Untitled.png">
+        <label>
+            Дефектоскопийная камера 1, связка с дефектоскопийной камерой 2
+        </label>
+    </div>
+    
+    <div class="preview">
+        <img src="/resources/Untitled.png">
+        <label>
+            Дефектоскопийная камера 2, связка с дефектоскопийной камерой 1
+        </label>
+    </div>
+</body>
+</html>

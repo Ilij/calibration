@@ -1,0 +1,110 @@
+button {
+    padding: 8px 16px;
+}
+
+pre {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+video {
+    top: 0px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.option {
+    margin-bottom: 8px;
+}
+
+input[type=range] {
+    padding: 0 5px;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+figure img{
+    width: 100%;
+}
+
+#help_frame {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+
+    background-color: rgba(128, 128, 128);
+    animation-duration: 2s;
+    animation: fadeOut;
+}
+
+aside{
+    background-color: blanchedalmond;
+    color: red;
+    padding: 10px;
+}
+
+aside::before{
+    content: "!!!";
+    color: red;
+}
+
+button#accept {
+    width: 100%;
+    background-color: green;
+}
+
+button#accept:disabled {
+    background-color: lightgray;
+}
+
+.camera_option{
+    float: left;
+}
+
+.camera_option label{
+    margin-left: 10px;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.center{
+    text-align: center;
+}
+
+.preview {
+}
+
+.preview img{
+    max-width: 90%;
+    height: auto;
+    margin: auto;
+    display: block;
+}
+
+.sample label{
+    text-align: left;
+}
+
+@fadeOut{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+

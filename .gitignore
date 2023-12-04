@@ -1,0 +1,12 @@
+.vscode
+MvImport
+chessboard/*
+common/*
+intrinsic/*
+odometry/*
+offset/*
+pallet/*
+sharpness/*
+logs/*
+venv
+test.ipynb

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="true">
+    <meta name="HandheldFriendly" content="true">
+    <title>Stage 0</title>
+    <link rel="stylesheet" href="/resources/style.css">
+</head>
+<body>
+    <title>
+        Сбор снимков для калибровки экстринстиков:
+    </title>
+    <ul>
+        <li>Шахматная доска</li>
+        <li><b>Смежные снимки</b></li>
+        <li>Одометрия</li>
+        <li>Направление конвейера</li>
+        <li>Поддон</li>
+    </ul>
+
+    Делаются для каждой лазерной камеры.
+    Отключается свет, на поддоне размещаются ступеньки, поперек плоскости лазера так чтобы лазер на одой ступеньке был виден целиком в двух смежных камерах.    
+    Затем делаются снимки каждой ступени с лазером двумя камерами.     
+    Идея в том чтобы заснять одни и те же лазерные точки в пространстве.
+    
+    <figure>
+        <img src="/resources/common_0.bmp">
+        <figcaption>
+            Средняя камера, ступень №4
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="/resources/common_0.bmp">
+        <figcaption>
+            Средняя камера, ступень №4
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="/resources/common_1.bmp">
+        <figcaption>
+            Крайняя камера, ступень №4
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="/resources/common_2.bmp">
+        <figcaption>
+            Средняя камера, ступень №1
+        </figcaption>
+    </figure>
+    <figure>
+        <img src="/resources/common_3.bmp">
+        <figcaption>
+            Крайняя камера, ступень №1
+        </figcaption>
+    </figure>
+    
+    <aside>
+        Лазер не должно быть видно на боковой поверхности ступеньки, иначе могут возникнуть проблемы с кластеризацией
+    </aside>
+</body>
+</html>

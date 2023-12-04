@@ -1,0 +1,145 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="true">
+    <meta name="HandheldFriendly" content="true">
+    <title>PBC calibration</title>
+    <link rel="stylesheet" href="/resources/style.css">
+    <script src="/resources/jquery.min.js"></script>
+    <script src="/resources/jsrender.min.js"></script>
+    <script src="/resources/webrtc_client.js"></script>
+    <script src="/resources/gestures.js"></script>
+
+    <script>
+        $(document).ready(()=>{
+            // $("#video").on("touchmove", (e)=>{
+            //     event.preventDefault();
+            //     TouchMove(e)
+            // }, false);
+
+            fetch('/config', {
+                body: JSON.stringify({
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST'
+            })
+            .then(response=>{
+                return response.json();
+            })
+            .then((data)=>{
+                fill_data(data);
+            });
+        });
+
+        function accept(){
+            $.ajax({
+                type: "POST",
+                url: '/accept',
+                data: '{""}',
+                success: (answer)=>{ console.log(answer);},
+                contentType: "application/json",
+                dataType: "json"
+            });
+        }
+
+        function post_message(command, value){
+            $(".ctrl").prop("disabled",true);
+            fetch(command, {
+                body: value,
+                headers: {
+                    'Content-Type': 'application/text'
+                },
+                method: 'POST'
+            });
+        } 
+
+        function fill_data(data){
+            $(".ctrl").prop("disabled",false);
+            if( typeof(data) == 'string')
+                return;
+            var template = $.templates("#selectOptionCamerasTmpl");
+            var htmlOutput = template.render(data);
+
+            $("#select_camera").html(htmlOutput);
+            $("#select_camera").val(data.current_device);
+            if( !$("#help_frame").prop('src').includes(data.help_link)) {
+                $("#help_frame").prop("src", data.help_link);
+                $("#help_frame").show();
+            }
+            if( data.hint )
+                $("hint").html(data.hint);
+
+            $("accept").prop('disabled', "accept" in data);
+            $("#stage").html($("#selectOptionStageTmpl").render(data));
+            $("#stage").val(data.stage);
+        }
+
+        function start(){
+            $("#start_button").remove();
+            connect(fill_data);
+        }
+    </script>
+</head>
+<body>
+    <button id="start_button" onclick="start()">Start</button>
+    <button onclick="$('#help_frame').toggle()">Help</button>
+
+    <script id="selectOptionCamerasTmpl" type="text/x-jsrender">
+        {{props cameras}}
+            <optgroup label="{{>key}}">
+                {{for prop}}
+                    <option value="{{:}}">{{:}}</option>
+                {{/for}}
+            </optgroup>
+        {{/props}}
+    </script>
+
+    <script id="selectOptionStageTmpl" type="text/x-jsrender">
+        {{props KA}}
+            <option value="{{>prop}}">{{>key}}</option>
+        {{/props}}
+    </script>
+
+    <div id="KA_content">
+        <iframe id="help_frame" src=""></iframe>
+
+        <fieldset id="cameras_div">
+            <legend>Live view</legend>
+            <div class="camera_option">
+                <label>current camera</label>
+                <select name="select_camera" id="select_camera" class="ctrl" onchange="post_message('/switch_camera', this.value)">
+                </select>
+            </div>
+            <div class="camera_option">
+                <label><a href="mode_settings.html">mode:</a></label>
+                <select name="camera_mode" id="camera_mode"  class="ctrl" onchange="post_message('/switch_mode', this.value)">
+                    <option value="auto" selected>auto</option>
+                    <option value="work">work</option>
+                </select>
+            </div>
+            <video id="video" autoplay></video>
+        </fieldset>
+
+        <fieldset style="display: none;">
+            <legend>
+                chessboard
+            </legend>
+            <label>detector</label>
+            <input type="checkbox" name="chessboard_detector" class="ctrl">
+            <label>show</label>
+            <input type="checkbox" name="chessboard_show"  class="ctrl">
+        </fieldset>
+
+        <fieldset id="KA_div">
+            <legend>stage</legend>
+            <div id="hint"></div>
+            <select id="stage" name="stage" onchange="post_message('/switch_stage', this.value)">
+            </select>
+            <button id="accept" class="ctrl" onclick="accept()" disabled>Accept</button>
+        </fieldset>
+    </div>
+</body>
+</html>
